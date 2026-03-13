@@ -1,0 +1,115 @@
+{
+  "name": "Agent AI M.Dafin Garnida",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "availableInChat": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fe102e5a-b0a3-49f5-9ec7-a4a20a3c474e",
+      "name": "When chat message received",
+      "webhookId": "db96d78d-36e5-48fb-a7ab-05d07456979d"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Kamu adalah agen ai dari nf academy yang menjawab dan memberikan saran untuk mengikuti pelatihan komputer di nf academy dan selaku pihak penyedia kursus komputer"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ffedc20d-0917-41b2-bbf2-f5f2ed46c13c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "800875fc-0b34-4c65-b37e-3eee91f01420",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kVh3JGuGCsWpVB00",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "ace2d68c-4b3c-49fc-92da-c45660eca8c3",
+      "name": "Simple Memory"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "d3a326b9-4333-497e-a81a-d3f3cb419296",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c04202e36c8e7205927e1b10d6b3ea74f546360f8cbd623bc1cb1e42db4c9ea8"
+  },
+  "id": "GoWcuTTgjdd7eNNF",
+  "tags": []
+}
